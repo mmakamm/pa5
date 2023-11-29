@@ -1,5 +1,6 @@
 import streamlit as st 
 import pandas as pd
+import openai
 st.header("Caption Generator")
 st.write("ไอเดียการเขียนแคปชั่นประกอบโพส โดยใช้ GPT-3 ของ OpenAI")
 st.sidebar.header("Caption Generator")               
@@ -9,4 +10,13 @@ if openai_api_key:
 else:
     st.sidebar.warning('Please enter your OpenAI API key!', icon='⚠️')
 
-chatbot_input = st.text_input("ต้องการเขียนแคปชั่นเกี่ยวกับอะไร")   
+chatbot_input = st.text_input("ต้องการเขียนแคปชั่นเกี่ยวกับอะไร") 
+if openai_api_key and chatbot_input:
+    openai.api_key = openai_api_key
+    response = openai.Completion.create(
+      engine="text-davinci-002",
+      prompt=chatbot_input,
+      temperature=0.5,
+      max_tokens=100
+    )
+    st.text_area("Response:", response.choices[0].text.strip())
