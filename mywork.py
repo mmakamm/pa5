@@ -1,7 +1,3 @@
-pip install openai
-pip install nltk
-pip install pythainlp
-
 import streamlit as st 
 
 st.header("Hello World 👏")
