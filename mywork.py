@@ -1,3 +1,4 @@
+pip install openai
 import openai
 import streamlit as st
 import pandas as pd
@@ -12,6 +13,7 @@ else:
     st.sidebar.warning('Please enter your OpenAI API key!', icon='⚠️')
 
 chatbot_input = st.text_input("ต้องการเขียนแคปชั่นเกี่ยวกับอะไร")
+
 if openai_api_key and chatbot_input:
     openai.api_key = openai_api_key
     response = openai.Completion.create(
