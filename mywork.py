@@ -1,6 +1,8 @@
+get_ipython().system('pip install openai')
+import openai
 import streamlit as st
 import pandas as pd
-import openai
+
 st.header("Caption Generator")
 st.write("ไอเดียการเขียนแคปชั่นประกอบโพส โดยใช้ GPT-3 ของ OpenAI")
 st.sidebar.header("Caption Generator")
@@ -10,7 +12,9 @@ if openai_api_key:
     st.sidebar.success('OpenAI API key provided!', icon='✅')
 else:
     st.sidebar.warning('Please enter your OpenAI API key!', icon='⚠️')
+
 chatbot_input = st.text_input("ต้องการเขียนแคปชั่นเกี่ยวกับอะไร")
+
 
 if openai_api_key and chatbot_input:
     openai.api_key = openai_api_key
