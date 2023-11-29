@@ -1,5 +1,5 @@
 import streamlit as st 
 import pandas as pd
-st.header("Hello World 👏")
-st.write("This is my first app")
+st.header("Caption Generator")
+st.write("ไอเดียการเขียนแคปชั่นประกอบโพส โดยใช้ GPT-3 ของ OpenAI")
 user_input = st.sidebar.text_input("Please add your OpenAI API key to continue", "you can get it from https://beta.openai.com/account/api-keys")    
