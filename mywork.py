@@ -14,7 +14,6 @@ else:
 
 chatbot_input = st.text_input("ต้องการเขียนแคปชั่นเกี่ยวกับอะไร")
 
-
 if openai_api_key and chatbot_input:
     openai.api_key = openai_api_key
     response = openai.Completion.create(
