@@ -10,6 +10,9 @@ if openai_api_key:
 else:
     st.sidebar.warning('Please enter your OpenAI API key!', icon='⚠️')
 
+
+import openai
+
 chatbot_input = st.text_input("ต้องการเขียนแคปชั่นเกี่ยวกับอะไร")
 
 if openai_api_key and chatbot_input:
