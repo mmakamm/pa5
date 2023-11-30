@@ -1,27 +1,26 @@
-import openai
 import streamlit as st
 
-# Load OpenAI API key
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+st.header("Caption Generator")
+st.write("ไอเดียการเขียนแคปชั่นประกอบโพส")
+st.sidebar.header("Caption Generator")
+openai_api_key = st.sidebar.text_input("Please add your OpenAI API key to continue", "")
 
-# Introduction
-st.title("🧑‍💻 Data-Espresso 💬 Bot")
-"""
-สวัสดีครับ ผมคือ Data-barista Bot ☕️ . 
-ยินดีที่ได้รู้จักนะครับ มีหลายอย่างที่ผมรู้ และผมตอบได้ อยากรู้อะไรถามมาได้เลยครับ แต่อย่าถามกวนนะ เดี๋ยวจะหาว่าไม่เตือน อิๆ 😀
-"""
+if openai_api_key:
+    st.sidebar.success('OpenAI API key provided!', icon='✅')
+else:
+    st.sidebar.warning('Please enter your OpenAI API key!', icon='⚠️')
 
-# Set the role of the chat
-if "messages" not in st.session_state:
-    st.session_state["messages"] = [
-    {"role": "system", "content": "You are a data analytics expert called Data-Barista, you love to use emojis. You are professional on data analytics and data science"}
-    ]
 
-# Parse user input to the chartGPT API
-if prompt := st.chat_input():
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    st.chat_message("user").write(prompt)
-    response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0613", messages=st.session_state.messages)
-    msg = response.choices[0].message
-    st.session_state.messages.append(msg)
-    st.chat_message("assistant").write(msg.content)
+import openai
+
+chatbot_input = st.text_input("ต้องการเขียนแคปชั่นเกี่ยวกับอะไร")
+
+if openai_api_key and chatbot_input:
+    openai.api_key = openai_api_key
+    response = openai.Completion.create(
+      engine="text-davinci-002",
+      prompt=chatbot_input,
+      temperature=0.5,
+      max_tokens=100
+    )
+    st.text_area("Response:", response.choices[0].text.strip())
