@@ -1,7 +1,3 @@
-import openai
-import streamlit as st
-import pandas as pd
-
 st.header("Caption Generator")
 st.write("ไอเดียการเขียนแคปชั่นประกอบโพส")
 st.sidebar.header("Caption Generator")
