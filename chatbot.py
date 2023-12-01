@@ -34,10 +34,7 @@ if st.session_state.openai_apikey != "":
             print(f"Rate limit exceeded. Waiting before making the next request. Error: {e}")
             time.sleep(60)  # Wait for a minute
             return call_openai_api(prompt)
-
-    response = call_openai_api(prompt)
-    st.text_area("Response:", response.choices[0].text.strip())
-
+        
     response = call_openai_api()
     st.text_area("Response:", response.choices[0].text.strip())
 else:
