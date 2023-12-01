@@ -22,11 +22,10 @@ if st.session_state.openai_apikey != "":
 
     openai.api_key = st.session_state.openai_apikey
 
-    def call_openai_api():
+    def call_openai_api(prompt):
         try:
-            response = create(
+            response = openai.Completion.create(
                 engine="text-davinci-002",
-                engine ="text-davinci-002",
                 prompt=prompt,
                 temperature=0.5,
                 max_tokens=3000
@@ -35,7 +34,10 @@ if st.session_state.openai_apikey != "":
         except openai.error.RateLimitError as e:
             print(f"Rate limit exceeded. Waiting before making the next request. Error: {e}")
             time.sleep(60)  # Wait for a minute
-            return call_openai_api()
+            return call_openai_api(prompt)
+
+    response = call_openai_api(prompt)
+    st.text_area("Response:", response.choices[0].text.strip())
 
     response = call_openai_api()
     st.text_area("Response:", response.choices[0].text.strip())
