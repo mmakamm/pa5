@@ -1,6 +1,33 @@
 import openai
 import streamlit as st
+from streamlit.report_thread import get_report_ctx
+from streamlit.server.server import Server
 
+class SessionState:
+    def __init__(self, **kwargs):
+        for key, val in kwargs.items():
+            setattr(self, key, val)
+
+# Function to get or create the session state
+def get_session_state():
+    session = get_report_ctx().session
+    if not hasattr(session, "_custom_session_state"):
+        session._custom_session_state = SessionState()
+    return session._custom_session_state
+
+st.set_page_config(
+    page_title="openai",
+    layout='wide',
+    initial_sidebar_state='auto',
+)
+
+# Initialize session state
+session_state = get_session_state()
+
+# Rest of your code remains unchanged
+# ...
+
+if session_state.openai_apikey != "":
 st.set_page_config(
     page_title="openai",
     layout='wide',
@@ -38,7 +65,7 @@ if st.session_state.openai_apikey != "":
         except Exception as e:
             st.error(f"Error occurred: {e}")
 
-    st.session_state.sync()  # Sync session state before calling the API
+    session_state.sync()  # Sync session state before calling the API
     response = call_openai_api()
     if response:
         st.text_area("Response:", response.choices[0].text.strip())
