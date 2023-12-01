@@ -2,6 +2,7 @@ import openai
 import streamlit as st
 import time
 from openai.types import Completion, CompletionChoice, CompletionUsage
+client = OpenAI()
 
 st.header("Caption Generator")
 st.write("ไอเดียการเขียนแคปชั่นประกอบโพส")
