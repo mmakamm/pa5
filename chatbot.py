@@ -1,7 +1,21 @@
 import openai
 import streamlit as st
 import time
-client = OpenAI()
+
+# Replace OpenAI() with OpenAI(api_key='your_api_key') to initialize the client with the API key
+client = openai.OpenAI(api_key='your_api_key')
+
+st.set_page_config(
+    page_title="openai",
+    layout='wide',
+    initial_sidebar_state='auto',
+)
+
+# Initialize session state
+if 'openai_apikey' not in st.session_state:
+    st.session_state.openai_apikey = ""
+if 'chatbot_input' not in st.session_state:
+    st.session_state.chatbot_input = ""
 
 st.header("Caption Generator")
 st.write("ไอเดียการเขียนแคปชั่นประกอบโพส")
