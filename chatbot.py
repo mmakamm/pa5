@@ -28,7 +28,7 @@ session_state = get_session_state()
 # ...
 
 if session_state.openai_apikey != "":
-st.set_page_config(
+    st.set_page_config(
     page_title="openai",
     layout='wide',
     initial_sidebar_state='auto',
