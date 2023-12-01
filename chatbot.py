@@ -7,6 +7,12 @@ st.set_page_config(
     initial_sidebar_state='auto',
 )
 
+# Initialize session state
+if 'openai_apikey' not in st.session_state:
+    st.session_state.openai_apikey = ""
+if 'chatbot_input' not in st.session_state:
+    st.session_state.chatbot_input = ""
+
 st.header("Caption Generator")
 st.write("ไอเดียการเขียนแคปชั่นประกอบโพส")
 st.sidebar.header("Caption Generator")
@@ -32,6 +38,7 @@ if st.session_state.openai_apikey != "":
         except Exception as e:
             st.error(f"Error occurred: {e}")
 
+    st.session_state.sync()  # Sync session state before calling the API
     response = call_openai_api()
     if response:
         st.text_area("Response:", response.choices[0].text.strip())
