@@ -2,6 +2,7 @@ import openai
 import streamlit as st
 import pandas as pd
 import time
+from openai import create
 
 st.set_page_config(
     page_title="openai",
@@ -20,10 +21,11 @@ if st.session_state.openai_apikey != "":
 
 
     openai.api_key = st.session_state.openai_apikey
-    prompt = f"Write 5 introductions for a blog post about {st.session_state.chatbot_input} and reason why I should use them"
+
     def call_openai_api():
         try:
-            response = openai.Completion.create(
+            response = create(
+                engine="text-davinci-002",
                 engine ="text-davinci-002",
                 prompt=prompt,
                 temperature=0.5,
