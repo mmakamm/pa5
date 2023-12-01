@@ -17,7 +17,7 @@ if st.session_state.openai_apikey != "":
     def call_openai_api():
         try:
             response = openai.Completion.create(
-                engine="text-davinci-003",
+                engine="text-davinci-002",
                 prompt=prompt,
                 temperature=0.5,
                 max_tokens=3000
