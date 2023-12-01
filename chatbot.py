@@ -15,7 +15,7 @@ st.sidebar.header("Caption Generator")
 st.sidebar.text_input("Please add your OpenAI API key to continue", key='openai_apikey')
 
 if st.session_state.openai_apikey != "":
-    st.success('OpenAI API key provided!', icon=':white_check_mark:') #condition detect the invalid api_key
+    st.success('OpenAI API key provided!') #condition detect the invalid api_key
     st.text_input("ต้องการเขียนแคปชั่นเกี่ยวกับอะไร", key = "chatbot_input")
 
 
