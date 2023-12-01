@@ -2,12 +2,13 @@ import openai
 import streamlit as st
 import time
 from openai.types import Completion, CompletionChoice, CompletionUsage
+from openai import AsyncOpenAI
 
 st.header("Caption Generator")
 st.write("ไอเดียการเขียนแคปชั่นประกอบโพส")
 st.sidebar.header("Caption Generator")
 st.sidebar.text_input("Please add your OpenAI API key to continue", key='openai_apikey')
-
+client = AsyncOpenAI()
 if st.session_state.openai_apikey != "":
     st.success('OpenAI API key provided!')
     st.text_input("ต้องการเขียนแคปชั่นเกี่ยวกับอะไร", key="chatbot_input")
