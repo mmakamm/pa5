@@ -41,4 +41,4 @@ if st.session_state.openai_apikey != "":
     response = call_openai_api()
     st.text_area("Response:", response.choices[0].text.strip())
 else:
-    st.warning('Please enter your OpenAI API key!', icon=':warning:')
+    st.warning('Please enter your OpenAI API key!', icon='⚠️')
