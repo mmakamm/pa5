@@ -1,12 +1,12 @@
 import openai
 import streamlit as st
 from streamlit.report_thread import get_report_ctx
-from streamlit.server.server import Server
 
 class SessionState:
     def __init__(self, **kwargs):
         for key, val in kwargs.items():
             setattr(self, key, val)
+
 
 # Function to get or create the session state
 def get_session_state():
