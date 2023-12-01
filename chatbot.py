@@ -1,7 +1,5 @@
 import openai
 import streamlit as st
-import pandas as pd
-import time
 
 st.set_page_config(
     page_title="openai",
@@ -15,8 +13,8 @@ st.sidebar.header("Caption Generator")
 st.sidebar.text_input("Please add your OpenAI API key to continue", key='openai_apikey')
 
 if st.session_state.openai_apikey != "":
-    st.success('OpenAI API key provided!') #condition detect the invalid api_key
-    st.text_input("ต้องการเขียนแคปชั่นเกี่ยวกับอะไร", key = "chatbot_input")
+    st.success('OpenAI API key provided!')
+    st.text_input("ต้องการเขียนแคปชั่นเกี่ยวกับอะไร", key="chatbot_input")
 
     openai.api_key = st.session_state.openai_apikey
     prompt = f"Write 5 introductions for a blog post about {st.session_state.chatbot_input} and reason why I should use them"
@@ -24,8 +22,8 @@ if st.session_state.openai_apikey != "":
     response = None
     def call_openai_api():
         try:
-            response = openai.Completion(
-                engine ="text-davinci-003",
+            response = openai.Completion.create(
+                engine="text-davinci-003",
                 prompt=prompt,
                 temperature=0.5,
                 max_tokens=3000
