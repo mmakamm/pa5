@@ -1,5 +1,6 @@
 import openai
 import streamlit as st
+import time
 
 st.header("Caption Generator")
 st.write("ไอเดียการเขียนแคปชั่นประกอบโพส")
@@ -25,6 +26,12 @@ if st.session_state.openai_apikey != "":
             return response
         except Exception as e:
             st.error(f"Error occurred: {e}")
+            print(f"Rate limit exceeded. Waiting before making the next request. Error: {e}")
+            time.sleep(60)  # Wait for a minute
+            return call_openai_api()
+
+    response = call_openai_api()
+    st.text_area("Response:", response.choices[0].text.strip())
 
 else:
     st.warning('Please enter your OpenAI API key!', icon='⚠️')
