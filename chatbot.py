@@ -3,7 +3,7 @@ import streamlit as st
 import time
 
 # Replace OpenAI() with OpenAI(api_key='your_api_key') to initialize the client with the API key
-client = openai.OpenAI(api_key='your_api_key')
+client = openai.openai(api_key='your_api_key')
 
 st.set_page_config(
     page_title="openai",
