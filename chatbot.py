@@ -2,7 +2,6 @@ import openai
 import streamlit as st
 import pandas as pd
 import time
-from openai import create
 
 st.set_page_config(
     page_title="openai",
